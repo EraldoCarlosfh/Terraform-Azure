@@ -6,10 +6,10 @@ variable "region" {
 
 variable "resourcegroup_name" {
   type = string
-  default = "devops"
+  default = "devops-rg"
 }
 
 variable "serviceplan_name" {
   type = string
-  default = "dotnet-sp"
+  default = "devops-sp"
 }

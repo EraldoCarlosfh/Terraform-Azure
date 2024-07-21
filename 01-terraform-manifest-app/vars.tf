@@ -6,12 +6,12 @@ variable "region" {
 
 variable "app_name" {
   type = string
-  default = "dotnetapp-devops"
+  default = "dotnetapp"
 }
 
 variable "resourcegroup" {
   type = string
-  default = "devops"
+  default = "devops-rg"
 }
 
 variable "serviceplan" {
