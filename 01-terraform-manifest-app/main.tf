@@ -35,7 +35,7 @@ resource "azurerm_windows_web_app" "example" {
     always_on = false
     application_stack {
       current_stack = "node"
-      node_version = "~20"
+      node_version = "~18"
     }
   }
 }
