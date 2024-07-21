@@ -16,5 +16,5 @@ variable "resourcegroup" {
 
 variable "serviceplan" {
   type = string
-  default = "dotnet-sp"
+  default = "devops-sp"
 }
