@@ -5,16 +5,19 @@ variable "region" {
 }
 
 variable "app_name" {
+  description = "The name of the static site application."
   type = string
-  default = "dotnetapp"
+  default = "site-cldsystem"
 }
 
 variable "resourcegroup" {
+  description = "The name of the resource group."
   type = string
-  default = "devops-rg"
+  default = "project_devops-rg"
 }
 
 variable "serviceplan" {
+  description = "The name of the service plan."
   type = string
-  default = "devops-sp"
+  default = "project_devops-sp"
 }

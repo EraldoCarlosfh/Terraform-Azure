@@ -25,17 +25,29 @@ data "azurerm_service_plan" "current" {
   resource_group_name = data.azurerm_resource_group.current.name
 }
 
-resource "azurerm_windows_web_app" "example" {
-  name                = upper("${var.app_name}-${terraform.workspace}")
+# Create a static site
+resource "azurerm_static_site" "example" {
+  name                = upper("${var.app_name}")
   resource_group_name = data.azurerm_resource_group.current.name
-  location            = data.azurerm_resource_group.current.location
-  service_plan_id     = data.azurerm_service_plan.current.id
+  location            = data.azurerm_resource_group.current.location 
+  # connection {
+  #   type                      = "AzureDevOps"
+  #   branch                    = "main"
+  #   url                       = var.azure_devops_repo_url
+  #   azure_devops_account_name = var.azure_devops_account_name
+  #   azure_devops_project_name = var.azure_devops_project_name
+  #   azure_devops_token        = var.azure_devops_token
+  #   host                      = "dev.azure.com"
+  #   build {
+  #     app_location      = "/"     # Path to app files
+  #     api_location      = ""     # Path to api files
+  #     output_location   = "/" # Path to generated static files
+  #   }
+  # }
+}
 
-  site_config {
-    always_on = false
-    application_stack {
-      current_stack = "node"
-      node_version = "~18"
-    }
-  }
+# Information output
+output "static_site_url" {
+  description = "A URL do site estático."
+  value       = azurerm_static_site.example.default_host_name
 }

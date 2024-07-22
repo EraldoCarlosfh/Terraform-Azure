@@ -10,7 +10,7 @@ terraform {
 }
 
 # Configure the Microsoft Azure Provider
-provider "azurerm" {  
+provider "azurerm" {
   features {}
 }
 
@@ -27,4 +27,16 @@ resource "azurerm_service_plan" "example" {
   resource_group_name = azurerm_resource_group.example.name
   os_type             = "Windows"
   sku_name            = "F1"
+}
+
+resource "azurerm_static_site" "example" {
+  name                = upper("${var.app_name}")
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+}
+
+# Information output
+output "static_site_url" {
+  description = "URL static site."
+  value       = azurerm_static_site.example.default_host_name
 }
