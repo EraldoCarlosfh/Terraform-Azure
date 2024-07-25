@@ -1,5 +1,4 @@
-# We strongly recommend using the required_providers block to set the
-# Azure Provider source and version being used
+# Configuração do Provider a ser utilizado e sua versão
 terraform {
   required_providers {
     azurerm = {
@@ -9,18 +8,18 @@ terraform {
   }
 }
 
-# Configure the Microsoft Azure Provider
+# Configuraões de acesso ao Microsoft Azure Provider
 provider "azurerm" {
   features {}
 }
 
-# Create a resource group
+# Criação do grupo de recursos
 resource "azurerm_resource_group" "example" {
   name     = var.resourcegroup_name
   location = var.region
 }
 
-# Create a service plain within the resource group
+# Criação do plano de serviço associado ao grupo de recursos
 resource "azurerm_service_plan" "example" {
   name                = var.serviceplan_name
   location            = azurerm_resource_group.example.location
@@ -29,13 +28,14 @@ resource "azurerm_service_plan" "example" {
   sku_name            = "F1"
 }
 
+# Criação site estático
 resource "azurerm_static_site" "example" {
   name                = upper("${var.app_name}")
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
 }
 
-# Information output
+# Informação de Saída
 output "static_site_url" {
   description = "URL static site."
   value       = azurerm_static_site.example.default_host_name
